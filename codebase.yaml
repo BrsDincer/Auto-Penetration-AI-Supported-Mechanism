@@ -1,0 +1,99 @@
+%YAML 1.1
+---
+
+tools:
+  DDosAttack:
+    include:
+      base: "https://github.com/EmreOvunc/Python-SYN-Flood-Attack-Tool"
+      readme: "https://raw.githubusercontent.com/EmreOvunc/Python-SYN-Flood-Attack-Tool/master/README.md"
+      howto: "python3 py3_synflood_cmd.py -t [ip address] -p [port number] -c 5"
+      example: "python3 py3_synflood_cmd.py -t 10.20.30.40 -p 8080 -c 5"
+
+apts:
+  Netcat:
+    install: "apt-get install netcat"
+    howto:
+        Listen: "nc [options] [port number]"
+        Connect: "nc [options] [ip address] [port number]"
+  Hashcat:
+    install: "apt-get install hashcat"
+    howto:
+      Example: "hashcat -m 1800 -a 0 hash.txt /usr/share/wordlists/rockyou.txt"
+  Ffuf:
+    install: "apt-get install ffuf"
+    howto:
+      Example: "ffuf -u http://localhost:3000/FUZZ -w /usr/share/wordlists/SecLists/Discovery/Web-Content/big.txt"
+  Scapy:
+    install: "apt-get install python3-scapy"
+    howto:
+      Example: "None"
+
+penetrations:
+  linux:
+    enumeration:
+      include:
+        - "cat /etc/issue"
+        - "cat /etc/*-release"
+        - "cat /proc/version"
+        - "uname -mrs"
+        - "env"
+        - "cat ~/.bashrc"
+        - "cat ~/.bash_logout"
+        - "ps -ef"
+        - "ps aux | grep root"
+        - "ls -alh /usr/bin/"
+        - "cat /etc/syslog.conf"
+        - "cat /etc/chttp.conf"
+        - "cat /etc/lighttpd.conf"
+        - "cat /etc/cups/cupsd.conf"
+        - "cat /etc/inetd.conf"
+        - "cat /etc/apache2/apache2.conf"
+        - "cat /etc/my.conf"
+        - "cat /etc/httpd/conf/httpd.conf"
+        - "cat /opt/lampp/etc/httpd.conf"
+        - "crontab -l"
+        - "/sbin/ifconfig -a"
+        - "cat /etc/network/interfaces"
+        - "cat /etc/resolv.conf"
+        - "cat /etc/networks"
+        - "hostname"
+        - "lsof -i"
+        - "route"
+        - "who"
+        - "id"
+        - "cat /etc/sudoers"
+        - "ls -ahlR /root/"
+        - "cat /var/mail/root"
+        - "cat ~/.ssh/authorized_keys"
+        - "cat ~/.ssh/id_rsa"
+        - "cat /etc/ssh/ssh_config"
+        - "ls -alh /var/log"
+        - "ls -alh /var/mail"
+        - "ls -alhR /var/www/"
+        - "cat /var/log/auth.log"
+        - "cat /var/log/lastlog"
+        - "cat /var/log/messages"
+        - "cat /var/log/syslog"
+  windows:
+    enumeration:
+      include:
+        - "whoami"
+        - "ver"
+        - 'systeminfo | findstr /B /C:"OS Name" /C:"OS Version" /C:"System Type"'
+        - "hostname"
+        - "ipconfig"
+        - "ipconfig /all"
+        - "wmic nicconfig get description,IPAddress,MACaddress"
+        - "route PRINT"
+        - "arp -a"
+        - "netstat -ano"
+        - "netsh advfirewall show currentprofile"
+        - "netsh advfirewall firewall show rule name=all"
+        - "netsh firewall show state"
+        - "sc query windefend"
+        - "tasklist /SVC"
+        - 'reg query "HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon"'
+        - "reg query HKLM /f password /t REG_SZ /s"
+        - "wmic cpu list full"
+        - "wmic product get name, version, vendor"
+        
